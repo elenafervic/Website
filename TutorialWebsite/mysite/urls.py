@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("polls/", include("polls.urls")),
+    path("polls/", include("polls.urls")),#Maybe if it finds polls/, then it checks if the url includes any of the url segments in "polls.urls". 
     path("admin/", admin.site.urls),
 ]
