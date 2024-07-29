@@ -1,0 +1,5 @@
+How to load your development server.
+
+In the terminal, cd into the TutorialWebsite folder. Then paste python3 manage.py runserver
+
+Then go to http://127.0.0.1:8000/ to find your site.

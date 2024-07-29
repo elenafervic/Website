@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path("polls/", include("polls.urls")),#Maybe if it finds polls/, then it checks if the url includes any of the url segments in "polls.urls". 
+    #After finding the match at 'polls/', it strips off the matching text ("polls/") and sends the remaining text – "34/" – to the ‘polls.urls’ URLconf for further processing.
     path("admin/", admin.site.urls),
 ]
