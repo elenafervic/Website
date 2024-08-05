@@ -4,8 +4,10 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li> 
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li> 
         <!--This looks up the current url of the detail page of the appropiate question, and links it to the words of the question text.-->
+        <!--Further, polls:detail tells you that you need to look for the name detail in the app polls-->
+
     {% endfor %}
     </ul>
 {% else %}
