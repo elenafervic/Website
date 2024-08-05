@@ -1,3 +1,12 @@
 <!--Can refer to this template within Django as polls/index.html, even though the file is at polls/templates/polls/index.html -->
 <!--I think this is because by default, django looks for a "templates" directory in each of the apps.-->
 
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
