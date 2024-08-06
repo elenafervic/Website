@@ -1,0 +1,3 @@
+*.pyc
+#This tells git to ignore all files that end in .pyc
+#This was done because we don't want to be uploading all the compiled files up to git hub.
