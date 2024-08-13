@@ -11,7 +11,7 @@ urlpatterns = [
     # ex: /polls/5/results/ 
     path("<int:question_id>/results/", views.results, name="results"),
     # ex: /polls/5/vote/
-    path("<int:question_id>/vote/", views.vote, name="vote"),
+    path("<int:question_id>/vote/", views.vote, name="vote"),#The url passes the question id to the vote view automatically.
     #ex: /polls/tableflip
     path("tableflip/", views.tableflip, name="tableflip"),
 ]
