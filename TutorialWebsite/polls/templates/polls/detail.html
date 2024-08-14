@@ -1,12 +1,18 @@
-<form action="{% url 'polls:vote' question.id %}" method="post">
-    {% csrf_token %}
-    <fieldset>
-        <legend><h1>{{ question.question_text }}</h1></legend>
+<form action="{% url 'polls:vote' question.id %}" method="post"> <!--This finds the url for the vote view in the poll app, and passes question.id as the argument.  -->
+    {% csrf_token %}  <!--Protects against cross site request forgery. All POST forms that are targeted at internal URLs (like the polls view) should use the {% csrf_token %} template tag. -->
+    <fieldset> <!--This groups some part of the form together, usually by drawing a box around it-->
+        <legend><h1>{{ question.question_text }}</h1></legend> <!--The legend tag makes a header for the box (otherwise called a caption)-->
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         {% for choice in question.choice_set.all %}
-            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> 
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br> <!--Puts a label to the input field.-->
         {% endfor %}
     </fieldset>
     <input type="submit" value="Vote"> <!--Creates a submit button (type=submit)-->
-    </form>
+    </form> <!--Finishes the form-->
+
+    <!--Explenation on the input element:-->
+    <!--the name attribute for the radio input makes sure that all the choices are grouped, so only one radio option can be picked at a time.-->
+    <!--id attribute defines a unique id for each radio button, which is then used to link each radio button to a label-->
+    <!--The value has the id of the actual choice which will be sent as post.-->
+    
