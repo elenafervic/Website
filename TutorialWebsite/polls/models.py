@@ -9,7 +9,8 @@ class Question(models.Model):#Each of these is a model I think.
     def __str__(self):#Called by doing print(Name_Of_Instance).
         return self.question_text
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now #Returns true if the published date is between now and a day ago. Otherwise it returns false.
 
 
 class Choice(models.Model):
