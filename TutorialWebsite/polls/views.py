@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 
 from django.template import loader
 
@@ -15,10 +16,15 @@ class IndexView(generic.ListView):#We name the view (it must match the name we h
     context_object_name = "latest_question_list"#Overwrite manually, since the automatically generated one is question_list (since its a list of the model question).
     
     def get_queryset(self):#When using list generic views, we need to provide the list we want to display using get_queryset.
-         """Return the last five published questions."""
-         return Question.objects.order_by("-pub_date")[:5]
+        """
+        Return the last five published questions (not including those set to be
+        published in the future).
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[
+            :5
+        ]#So we filter only the questions published before now, and then show the last 5 that have been published.
     #Now the generic view will do all the rendering and define the context.
-
+       
 class DetailView(generic.DetailView):
     model = Question #I need to specify the model I am working with.
     template_name = "polls/detail.html" #Overwrite the automatically generated template name.
