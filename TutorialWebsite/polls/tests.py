@@ -118,25 +118,3 @@ class QuestionIndexViewTests(TestCase):
             [question2, question1],
         )
     
-
-
-
-class IndexViewTests(TestCase):
-    def test_get_queryset_with_future_question(self):#We write the function we are testing, and what we are testing it with.
-        """
-        get_queryset() should return only questions that have already been published.
-        """
-        Futuretime = timezone.now() + datetime.timedelta(days=30)
-        Pasttime= timezone.now() - datetime.timedelta(days=30)
-        
-        QFuture = Question(question_text="QFuture",pub_date=Futuretime)
-        QFuture.save()
-        
-        QPast=Question(question_text="QPast" ,pub_date=Pasttime)
-        QPast.save()
-        
-        ShouldReturn=Question.objects.filter(pub_date=Pasttime)
-        print(ShouldReturn)
-        
-        self.assertQuerysetEqual(views.IndexView.get_queryset(TestCase), ShouldReturn,transform=lambda x: x)
-        #I think it creates a test database when testing so no need to delete the question.
